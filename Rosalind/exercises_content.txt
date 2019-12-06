@@ -1,0 +1,314 @@
+########## ex 1 ##########
+After downloading and installing Python, type import this into the Python command line and see what happens. Then, click the "Download dataset" button below and copy the Zen of Python into the space provided.
+
+###########################
+########## ex 2 ##########
+Given: Two positive integers a and b, each less than 1000.
+
+Return: The integer corresponding to the square of the hypotenuse of the right triangle whose legs have lengths a and b.
+
+Notes:
+
+The dataset changes every time you click "Download dataset".
+We check only your final answer to the downloaded dataset in the box below, not your code itself. If you would like to provide your code as well, you may use the upload tool. Please also note that the correct answer to this problem will not in general be 34; it is simply an example of what you should return in the specific case that the legs of the triangle have length 3 and 5.
+Sample Dataset:
+3 5
+Sample Output:
+34
+
+###########################
+########## ex 3 ##########
+Given: A string s of length at most 200 letters and four integers a, b, c and d.
+
+Return: The slice of this string from indices a through b and c through d (with space in between), inclusively. In other words, we should include elements s[b] and s[d] in our slice.
+
+Sample Dataset:
+HumptyDumptysatonawallHumptyDumptyhadagreatfallAlltheKingshorsesandalltheKingsmenCouldntputHumptyDumptyinhisplaceagain.
+22 27 97 102
+Sample Output:
+Humpty Dumpty
+
+###########################
+########## ex 4 ##########
+Given: Two positive integers a and b (a<b<10000).
+
+Return: The sum of all odd integers from a through b, inclusively.
+
+Sample Dataset:
+100 200
+Sample Output:
+7500
+
+###########################
+########## ex 5 ##########
+Given: A file containing at most 1000 lines.
+
+Return: A file containing all the even-numbered lines from the original file. Assume 1-based numbering of lines.
+
+Sample Dataset:
+Bravely bold Sir Robin rode forth from Camelot
+Yes, brave Sir Robin turned about
+He was not afraid to die, O brave Sir Robin
+And gallantly he chickened out
+He was not at all afraid to be killed in nasty ways
+Bravely talking to his feet
+Brave, brave, brave, brave Sir Robin
+He beat a very brave retreat
+
+Sample Output:
+Yes, brave Sir Robin turned about
+And gallantly he chickened out
+Bravely talking to his feet
+He beat a very brave retreat
+
+###########################
+########## ex 6 ##########
+Given: A string s of length at most 10000 letters.
+
+Return: The number of occurrences of each word in s, where words are separated by spaces. Words are case-sensitive, and the lines in the output can be in any order.
+
+Sample Dataset:
+We tried list and we tried dicts also we tried Zen
+
+Sample Output:
+and 1
+We 1
+tried 3
+dicts 1
+list 1
+we 2
+also 1
+Zen 1
+
+###########################
+########## ex 7 ##########
+A string is simply an ordered collection of symbols selected from some alphabet and formed into a word; the length of a string is the number of symbols that it contains.
+
+An example of a length 21 DNA string (whose alphabet contains the symbols 'A', 'C', 'G', and 'T') is "ATGCTTCAGAAAGGTCTTACG."
+
+Given: A DNA string s of length at most 1000 nt.
+
+Return: Four integers (separated by spaces) counting the respective number of times that the symbols 'A', 'C', 'G', and 'T' occur in s.
+
+Sample Dataset:
+AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC
+
+Sample Output:
+20 12 17 21
+
+###########################
+########## ex 8 ##########
+An RNA string is a string formed from the alphabet containing 'A', 'C', 'G', and 'U'.
+
+Given a DNA string t corresponding to a coding strand, its transcribed RNA string u is formed by replacing all occurrences of 'T' in t with 'U' in u.
+
+Given: A DNA string t having length at most 1000 nt.
+
+Return: The transcribed RNA string of t.
+
+Sample Dataset:
+GATGGAACTTGACTACGTAAATT
+
+Sample Output:
+GAUGGAACUUGACUACGUAAAUU
+
+###########################
+########## ex 9 ##########
+In DNA strings, symbols 'A' and 'T' are complements of each other, as are 'C' and 'G'.
+
+The reverse complement of a DNA string s is the string sc formed by reversing the symbols of s, then taking the complement of each symbol (e.g., the reverse complement of "GTCA" is "TGAC").
+
+Given: A DNA string s of length at most 1000 bp.
+
+Return: The reverse complement sc of s.
+
+Sample Dataset:
+AAAACCCGGT
+
+Sample Output:
+ACCGGGTTTT
+
+###########################
+########## ex 10 ##########
+The GC-content of a DNA string is given by the percentage of symbols in the string that are 'C' or 'G'. For example, the GC-content of "AGCTATAG" is 37.5%. Note that the reverse complement of any DNA string has the same GC-content.
+
+DNA strings must be labeled when they are consolidated into a database. A commonly used method of string labeling is called FASTA format. In this format, the string is introduced by a line that begins with '>', followed by some labeling information. Subsequent lines contain the string itself; the first line to begin with '>' indicates the label of the next string.
+
+In Rosalind's implementation, a string in FASTA format will be labeled by the ID "Rosalind_xxxx", where "xxxx" denotes a four-digit code between 0000 and 9999.
+
+Given: At most 10 DNA strings in FASTA format (of length at most 1 kbp each).
+
+Return: The ID of the string having the highest GC-content, followed by the GC-content of that string. Rosalind allows for a default error of 0.001 in all decimal answers unless otherwise stated; please see the note on absolute error below.
+
+Sample Dataset:
+>Rosalind_6404
+CCTGCGGAAGATCGGCACTAGAATAGCCAGAACCGTTTCTCTGAGGCTTCCGGCCTTCCC
+TCCCACTAATAATTCTGAGG
+>Rosalind_5959
+CCATCGGTAGCGCATCCTTAGTCCAATTAAGTCCCTATCCAGGCGCTCCGCCGAAGGTCT
+ATATCCATTTGTCAGCAGACACGC
+>Rosalind_0808
+CCACCCTCGTGGTATGGCTAGGCATTCAGGAACCGGAGAACGCTTCAGACCAGCCCGGAC
+TGGGAACCTGCGGGCAGTAGGTGGAAT
+
+Sample Output:
+Rosalind_0808
+60.919540
+
+###########################
+########## ex 11 ##########
+The 20 commonly occurring amino acids are abbreviated by using 20 letters from the English alphabet (all letters except for B, J, O, U, X, and Z). Protein strings are constructed from these 20 symbols. Henceforth, the term genetic string will incorporate protein strings along with DNA strings and RNA strings.
+
+The RNA codon table dictates the details regarding the encoding of specific codons into the amino acid alphabet.
+
+Given: An RNA string s corresponding to a strand of mRNA (of length at most 10 kbp).
+
+Return: The protein string encoded by s.
+
+Sample Dataset:
+AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA
+
+Sample Output:
+MAMAPRTEINSTRING
+
+###########################
+########## ex 12 ##########
+Given two strings s and t, t is a substring of s if t is contained as a contiguous collection of symbols in s (as a result, t must be no longer than s).
+
+The position of a symbol in a string is the total number of symbols found to its left, including itself (e.g., the positions of all occurrences of 'U' in "AUGCUUCAGAAAGGUCUUACG" are 2, 5, 6, 15, 17, and 18). The symbol at position i of s is denoted by s[i].
+
+A substring of s can be represented as s[j:k], where j and k represent the starting and ending positions of the substring in s; for example, if s = "AUGCUUCAGAAAGGUCUUACG", then s[2:5] = "UGCU".
+
+The location of a substring s[j:k] is its beginning position j; note that t will have multiple locations in s if it occurs more than once as a substring of s (see the Sample below).
+
+Given: Two DNA strings s and t (each of length at most 1 kbp).
+
+Return: All locations of t as a substring of s.
+
+Sample Dataset:
+GATATATGCATATACTT
+ATAT
+
+Sample Output:
+2 4 10
+
+###########################
+########## ex 13 ##########
+For a fixed positive integer k, order all possible k-mers taken from an underlying alphabet lexicographically.
+
+Then the k-mer composition of a string s can be represented by an array A for which A[m] denotes the number of times that the mth k-mer (with respect to the lexicographic order) appears in s.
+
+Given: A DNA string s in FASTA format (having length at most 100 kbp).
+
+Return: The 4-mer composition of s.
+
+Sample Dataset:
+>Rosalind_6431
+CTTCGAAAGTTTGGGCCGAGTCTTACAGTCGGTCTTGAAGCAAAGTAACGAACTCCACGG
+CCCTGACTACCGAACCAGTTGTGAGTACTCAACTGGGTGAGAGTGCAGTCCCTATTGAGT
+TTCCGAGACTCACCGGGATTTTCGATCCAGCCTCAGTCCAGTCTTGTGGCCAACTCACCA
+AATGACGTTGGAATATCCCTGTCTAGCTCACGCAGTACTTAGTAAGAGGTCGCTGCAGCG
+GGGCAAGGAGATCGGAAAATGTGCTCTATATGCGACTAAAGCTCCTAACTTACACGTAGA
+CTTGCCCGTGTTAAAAACTCGGCTCACATGCTGTCTGCGGCTGGCTGTATACAGTATCTA
+CCTAATACCCTTCAGTTCGCCGCACAAAAGCTGGGAGTTACCGCGGAAATCACAG
+
+Sample Output:
+4 1 4 3 0 1 1 5 1 3 1 2 2 1 2 0 1 1 3 1 2 1 3 1 1 1 1 2 2 5 1 3 0 2 2 1 1 1 1 3 1 0 0 1 5 5 1 5 0 2 0 2 1 2 1 1 1 2 0 1 0 0 1 1 3 2 1 0 3 2 3 0 0 2 0 8 0 0 1 0 2 1 3 0 0 0 1 4 3 2 1 1 3 1 2 1 3 1 2 1 2 1 1 1 2 3 2 1 1 0 1 1 3 2 1 2 6 2 1 1 1 2 3 3 3 2 3 0 3 2 1 1 0 0 1 4 3 0 1 5 0 2 0 1 2 1 3 0 1 2 2 1 1 0 3 0 0 4 5 0 3 0 2 1 1 3 0 3 2 2 1 1 0 2 1 0 2 2 1 2 0 2 2 5 2 2 1 1 2 1 2 2 2 2 1 1 3 4 0 2 1 1 0 1 2 2 1 1 1 5 2 0 3 2 1 1 2 2 3 0 3 0 1 3 1 2 3 0 2 1 2 2 1 2 3 0 1 2 3 1 1 3 1 0 1 1 3 0 2 1 2 2 0 2 1 1
+
+###########################
+########## ex 14 ##########
+
+###########################
+########## ex 15 ##########
+
+###########################
+########## ex 16 ##########
+
+###########################
+########## ex 17 ##########
+
+###########################
+########## ex 18 ##########
+
+###########################
+########## ex 19 ##########
+
+###########################
+########## ex 20 ##########
+
+###########################
+########## ex 21 ##########
+
+###########################
+########## ex 22 ##########
+
+###########################
+########## ex 23 ##########
+
+###########################
+########## ex 24 ##########
+
+###########################
+########## ex 25 ##########
+
+###########################
+########## ex 26 ##########
+
+###########################
+########## ex 27 ##########
+
+###########################
+########## ex 28 ##########
+
+###########################
+########## ex 29 ##########
+
+###########################
+########## ex 30 ##########
+
+###########################
+########## ex 31 ##########
+
+###########################
+########## ex 32 ##########
+
+###########################
+########## ex 33 ##########
+
+###########################
+########## ex 34 ##########
+
+###########################
+########## ex 35 ##########
+
+###########################
+########## ex 36 ##########
+
+###########################
+########## ex 37 ##########
+
+###########################
+########## ex 38 ##########
+
+###########################
+########## ex 39 ##########
+
+###########################
+########## ex 40 ##########
+
+###########################
+########## ex 41 ##########
+
+###########################
+########## ex 42 ##########
+
+###########################
+########## ex 43 ##########
+
+###########################
+########## ex 44 ##########
+
+###########################
+########## ex 45 ##########
+
+###########################

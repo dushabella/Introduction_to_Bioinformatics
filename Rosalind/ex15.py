@@ -1,6 +1,5 @@
 from typing import Set, List
 
-# read DNA string from input file
 dna = str()
 with open("input.txt", "r") as file:
     for line in file:

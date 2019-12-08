@@ -27,6 +27,7 @@ def find_suffixes(sequence: str, k:int) -> Set[str]:
 # - I mean how to run failure_array which is "main" function
 
 def failure_array(sequence: str, k:int) -> List[int]:
+    failure_array = list()
     for i in range(k):
         prefixes = find_prefixes(sequence, i)
         suffixes = find_suffixes(sequence, i)
@@ -34,5 +35,7 @@ def failure_array(sequence: str, k:int) -> List[int]:
         longest = max(intersected, key=len)
         len_of_longest = len(longest)
         print(len_of_longest, end=" ")
+        failure_array.append(len_of_longest)
+    return failure_array
 
 failure_array(dna, len(dna))

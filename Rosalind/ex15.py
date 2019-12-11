@@ -23,3 +23,6 @@ def failure_array(sequence: str) -> List[int]:
 
 for element in failure_array(dna):
     print(element, end=" ")
+
+for i in range(1, 5):
+    print(i)

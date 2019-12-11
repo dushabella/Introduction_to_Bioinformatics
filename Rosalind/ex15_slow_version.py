@@ -23,9 +23,6 @@ def find_suffixes(sequence: str, k:int) -> Set[str]:
     suffixes = set(suffixes)
     return suffixes
 
-#TODO: ask Piotrek how to run functions in a pretty way
-# - I mean how to run failure_array which is "main" function
-
 def failure_array(sequence: str, k:int) -> List[int]:
     failure_array = list()
     for i in range(k):

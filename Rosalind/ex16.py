@@ -17,7 +17,7 @@ def calculate_probability(sequence: str, x: float) -> float:
             probability += log10((1 - x) / 2)
     return probability
 
-# create and print an array of probabilities `
+# create and print an array of probabilities
 def create_array(sequence: List[str], gc_contents: List[float]) -> List[float]:
     probabilities = list()
     for x in gc_contents:

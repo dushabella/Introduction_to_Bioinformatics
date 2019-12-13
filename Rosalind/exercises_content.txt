@@ -288,6 +288,19 @@ Sample Output:
 
 ###########################
 ########## ex 17 ##########
+An ORF begins with a start codon and ends either at a stop codon or at the end of the string. We will assume the standard genetic code for translating an RNA string into a protein string (i.e., see the standard RNA codon table).
+
+ORF finder from the SMS 2 package can be run online here.
+
+Given: A DNA string s of length at most 1 kbp.
+
+Return: The longest protein string that can be translated from an ORF of s. If more than one protein string of maximum length exists, then you may output any solution.
+
+Sample Dataset:
+AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG
+
+Sample Output:
+MLLGSFRLIPKETLIQVAGSSPCNLS
 
 ###########################
 ########## ex 18 ##########

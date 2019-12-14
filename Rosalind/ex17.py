@@ -34,7 +34,6 @@ def distinguish_codons(sequence: str) -> List[List[str]]:
         codons.append([sequence[i+j:i+j+3] for i in range(0, sequence_len, 3)])
         if len(codons[j][-1]) < 3:
             del(codons[j][-1])
-    print(codons)
     return codons
 
 def find_orfs(sequence: List[str]) -> List[List[str]]:
@@ -53,18 +52,23 @@ def find_longest_orf(orfs: List[List[str]]) -> List[str]:
     maxOrf = max(orfs, key = len)
     return(maxOrf)
 
+# generate the second part of genome
 reverted_dna = revert_genome(dna)
+
+# divide a whole gemone into parts
 codons = distinguish_codons(dna)
 codons += distinguish_codons(reverted_dna)
-print(type(codons))
-print(codons)
 
 # generate all possible orf sequences
 orfs = []
 for i in range(6):
-    print(codons[i])
     orfs += find_orfs(codons[i])
-print(orfs)
 
-print("najdluzszy")
-print(find_longest_orf(orfs))
+# find the longest orf chain
+longest_orf = find_longest_orf(orfs)
+
+# replace T with U in longest orf chain
+longest_orf = [i.replace('T', 'U') for i in longest_orf]
+
+for codon in longest_orf:
+    print(rna_codon_table[codon], end='')

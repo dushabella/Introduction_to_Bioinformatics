@@ -1,15 +1,18 @@
 dnas = []
+temp_str = ''
 with open('input.txt', 'r') as file:
     for line in file:
         if line.startswith('>'):
-            continue
+            if temp_str != '':
+                dnas.append(temp_str)
+                temp_str = ''
         else:
-           dnas.append(line[:-1])
+            temp_str += line[:-1]
+    dnas.append(temp_str)
 
 def count_p_distance(str1: str, str2: str) -> float:
     i = 0
     diff = 0
-    p_distance = 0
     if len(str1) != len(str2):
         raise Exception('Compared strings must be the same length!')
     for position in str1:
@@ -25,5 +28,5 @@ num_of_chains = len(dnas)
 for i in range(num_of_chains):
     for j in range(num_of_chains):
         p_distance = count_p_distance(dnas[i], dnas[j])
-        print(p_distance, end=' ')
+        print(f'{p_distance:.5f}', end=' ')
     print()

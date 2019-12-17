@@ -1,21 +1,24 @@
+from Bio import pairwise2
+from Bio.pairwise2 import format_alignment
+
 with open('input.txt', 'r') as file:
     lines = file.readlines()
-
-proteins = []
-protein_hlpr = []
+strings = []
+temp = []
 for line in lines:
     if line.startswith('>'):
-        protein_hlpr = ''.join(protein_hlpr)
-        proteins.append(protein_hlpr)
-        protein_hlpr = []
+        temp = ''.join(temp)
+        strings.append(temp)
+        temp = []
         continue
     else:
-        protein_hlpr.append(line[:-1])
-protein_hlpr = ''.join(protein_hlpr)
-proteins.append(protein_hlpr)
-proteins.remove('')
+        temp.append(line[:-1])
+temp = ''.join(temp)
+strings.append(temp)
+strings.remove('')
+print(strings)
 
-def edit_distance(a, b):
+def edit_distance(a: str, b: str) -> int:
     """Return the Levenshtein edit distance between two strings *a* and *b*."""
     """ https://dzone.com/articles/the-levenshtein-algorithm-1 """
     if a == b:
@@ -35,4 +38,9 @@ def edit_distance(a, b):
         previous_row = current_row
     return previous_row[-1]
 
-print(edit_distance(proteins[0], proteins[1]))
+levensthein_dist = edit_distance(strings[0], strings[1])
+print(levensthein_dist)
+
+alignments = pairwise2.align.globalxx(strings[0], strings[1])
+print(format_alignment(*alignments[0]))
+""" more about alignments: https://developer.ibm.com/articles/j-seqalign/"""

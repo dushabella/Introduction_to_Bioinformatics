@@ -1,8 +1,10 @@
 ########## ex 1 ##########
+***Installing Python***
 After downloading and installing Python, type import this into the Python command line and see what happens. Then, click the "Download dataset" button below and copy the Zen of Python into the space provided.
 
 ###########################
 ########## ex 2 ##########
+***Variables and Some Arithmetic***
 Given: Two positive integers a and b, each less than 1000.
 
 Return: The integer corresponding to the square of the hypotenuse of the right triangle whose legs have lengths a and b.
@@ -18,6 +20,7 @@ Sample Output:
 
 ###########################
 ########## ex 3 ##########
+***Strings and Lists***
 Given: A string s of length at most 200 letters and four integers a, b, c and d.
 
 Return: The slice of this string from indices a through b and c through d (with space in between), inclusively. In other words, we should include elements s[b] and s[d] in our slice.
@@ -25,11 +28,13 @@ Return: The slice of this string from indices a through b and c through d (with 
 Sample Dataset:
 HumptyDumptysatonawallHumptyDumptyhadagreatfallAlltheKingshorsesandalltheKingsmenCouldntputHumptyDumptyinhisplaceagain.
 22 27 97 102
+
 Sample Output:
 Humpty Dumpty
 
 ###########################
 ########## ex 4 ##########
+***Conditions and Loops***
 Given: Two positive integers a and b (a<b<10000).
 
 Return: The sum of all odd integers from a through b, inclusively.
@@ -41,6 +46,7 @@ Sample Output:
 
 ###########################
 ########## ex 5 ##########
+***Working with Files***
 Given: A file containing at most 1000 lines.
 
 Return: A file containing all the even-numbered lines from the original file. Assume 1-based numbering of lines.
@@ -63,6 +69,7 @@ He beat a very brave retreat
 
 ###########################
 ########## ex 6 ##########
+***Dictionaries***
 Given: A string s of length at most 10000 letters.
 
 Return: The number of occurrences of each word in s, where words are separated by spaces. Words are case-sensitive, and the lines in the output can be in any order.
@@ -82,6 +89,7 @@ Zen 1
 
 ###########################
 ########## ex 7 ##########
+***Counting DNA Nucleotides***
 A string is simply an ordered collection of symbols selected from some alphabet and formed into a word; the length of a string is the number of symbols that it contains.
 
 An example of a length 21 DNA string (whose alphabet contains the symbols 'A', 'C', 'G', and 'T') is "ATGCTTCAGAAAGGTCTTACG."
@@ -98,6 +106,7 @@ Sample Output:
 
 ###########################
 ########## ex 8 ##########
+***Transcribing DNA into RNA***
 An RNA string is a string formed from the alphabet containing 'A', 'C', 'G', and 'U'.
 
 Given a DNA string t corresponding to a coding strand, its transcribed RNA string u is formed by replacing all occurrences of 'T' in t with 'U' in u.
@@ -114,6 +123,7 @@ GAUGGAACUUGACUACGUAAAUU
 
 ###########################
 ########## ex 9 ##########
+***Complementing a Strand of DNA***
 In DNA strings, symbols 'A' and 'T' are complements of each other, as are 'C' and 'G'.
 
 The reverse complement of a DNA string s is the string sc formed by reversing the symbols of s, then taking the complement of each symbol (e.g., the reverse complement of "GTCA" is "TGAC").
@@ -130,6 +140,7 @@ ACCGGGTTTT
 
 ###########################
 ########## ex 10 ##########
+***Computing GC Content***
 The GC-content of a DNA string is given by the percentage of symbols in the string that are 'C' or 'G'. For example, the GC-content of "AGCTATAG" is 37.5%. Note that the reverse complement of any DNA string has the same GC-content.
 
 DNA strings must be labeled when they are consolidated into a database. A commonly used method of string labeling is called FASTA format. In this format, the string is introduced by a line that begins with '>', followed by some labeling information. Subsequent lines contain the string itself; the first line to begin with '>' indicates the label of the next string.
@@ -157,6 +168,7 @@ Rosalind_0808
 
 ###########################
 ########## ex 11 ##########
+***Translating RNA into Protein***
 The 20 commonly occurring amino acids are abbreviated by using 20 letters from the English alphabet (all letters except for B, J, O, U, X, and Z). Protein strings are constructed from these 20 symbols. Henceforth, the term genetic string will incorporate protein strings along with DNA strings and RNA strings.
 
 The RNA codon table dictates the details regarding the encoding of specific codons into the amino acid alphabet.
@@ -173,6 +185,7 @@ MAMAPRTEINSTRING
 
 ###########################
 ########## ex 12 ##########
+***Finding a Motif in DNA***
 Given two strings s and t, t is a substring of s if t is contained as a contiguous collection of symbols in s (as a result, t must be no longer than s).
 
 The position of a symbol in a string is the total number of symbols found to its left, including itself (e.g., the positions of all occurrences of 'U' in "AUGCUUCAGAAAGGUCUUACG" are 2, 5, 6, 15, 17, and 18). The symbol at position i of s is denoted by s[i].
@@ -194,6 +207,7 @@ Sample Output:
 
 ###########################
 ########## ex 13 ##########
+***k-Mer Composition***
 For a fixed positive integer k, order all possible k-mers taken from an underlying alphabet lexicographically.
 
 Then the k-mer composition of a string s can be represented by an array A for which A[m] denotes the number of times that the mth k-mer (with respect to the lexicographic order) appears in s.
@@ -217,6 +231,7 @@ Sample Output:
 
 ###########################
 ########## ex 14 ##########
+***Enumerating k-mers Lexicographically***
 Assume that an alphabet 𝒜 has a predetermined order; that is, we write the alphabet as a permutation 𝒜=(a1,a2,…,ak), where a1<a2<⋯<ak. For instance, the English alphabet is organized as (A,B,…,Z).
 
 Given two strings s and t having the same length n, we say that s precedes t in the lexicographic order (and write s<Lext) if the first symbol s[j] that doesn't match t[j] satisfies sj<tj in 𝒜.
@@ -248,6 +263,7 @@ TT
 
 ###########################
 ########## ex 15 ##########
+***Speeding Up Motif Finding***
 A prefix of a length n string s is a substring s[1:j]; a suffix of s is a substring s[k:n].
 
 The failure array of s is an array P of length n for which P[k] is the length of the longest substring s[j:k] that is equal to some prefix s[1:k−j+1], where j cannot equal 1 (otherwise, P[k] would always equal k). By convention, P[1]=0.
@@ -265,6 +281,7 @@ Sample Output:
 
 ###########################
 ########## ex 16 ##########
+***Introduction to Random Strings***
 An array is a structure containing an ordered collection of objects (numbers, strings, other arrays, etc.). We let A[k] denote the k-th value in array A. You may like to think of an array as simply a matrix having only one row.
 
 A random string is constructed so that the probability of choosing each subsequent symbol is based on a fixed underlying symbol frequency.
@@ -288,6 +305,7 @@ Sample Output:
 
 ###########################
 ########## ex 17 ##########
+***Finding Genes with ORFs***
 An ORF begins with a start codon and ends either at a stop codon or at the end of the string. We will assume the standard genetic code for translating an RNA string into a protein string (i.e., see the standard RNA codon table).
 
 ORF finder from the SMS 2 package can be run online here.
@@ -304,6 +322,7 @@ MLLGSFRLIPKETLIQVAGSSPCNLS
 
 ###########################
 ########## ex 18 ##########
+***Open Reading Frames***
 Either strand of a DNA double helix can serve as the coding strand for RNA transcription. Hence, a given DNA string implies six total reading frames, or ways in which the same region of DNA can be translated into amino acids: three reading frames result from reading the string itself, whereas three more result from reading its reverse complement.
 
 An open reading frame (ORF) is one which starts from the start codon and ends by stop codon, without any other stop codons in between. Thus, a candidate protein string is derived by translating an open reading frame into amino acids until a stop codon is reached.
@@ -323,6 +342,7 @@ MGMTPRLGLESLLE
 
 ###########################
 ########## ex 19 ##########
+***Creating a Distance Matrix***
 For two strings s1 and s2 of equal length, the p-distance between them, denoted dp(s1,s2), is the proportion of corresponding symbols that differ between s1 and s2.
 
 For a general distance function d on n taxa s1,s2,…,sn (taxa are often represented by genetic strings), we may encode the distances between pairs of taxa via a distance matrix D in which Di,j=d(si,sj).
@@ -349,6 +369,7 @@ Sample Output:
 
 ###########################
 ########## ex 20 ##########
+***Counting Point Mutations***
 Given two strings s and t of equal length, the Hamming distance between s and t, denoted dH(s,t), is the number of corresponding symbols that differ in s and t. See Figure 2.
 
 Given: Two DNA strings s and t of equal length (not exceeding 1 kbp).
@@ -364,6 +385,7 @@ Sample Output:
 
 ###########################
 ########## ex 21 ##########
+***Edit Distance***
 Given two strings s and t (of possibly different lengths), the edit distance dE(s,t) is the minimum number of edit operations needed to transform s into t, where an edit operation is defined as the substitution, insertion, or deletion of a single symbol.
 
 The latter two operations incorporate the case in which a contiguous interval is inserted into or deleted from a string; such an interval is called a gap. For the purposes of this problem, the insertion or deletion of a gap of length k still counts as k distinct edit operations.
@@ -383,7 +405,26 @@ Sample Output:
 
 ###########################
 ########## ex 22 ##########
+***Edit Distance Alignment***
+An alignment of two strings s and t is defined by two strings s′ and t′ satisfying the following three conditions: 1. s′ and t′ must be formed from adding gap symbols "-" to each of s and t, respectively; as a result, s and t will form subsequences of s′ and t′. 2. s′ and t′ must have the same length. 3. Two gap symbols may not be aligned; that is, if s′[j] is a gap symbol, then t′[j] cannot be a gap symbol, and vice-versa.
 
+We say that s′ and t′ augment s and t. Writing s′ directly over t′ so that symbols are aligned provides us with a scenario for transforming s into t. Mismatched symbols from s and t correspond to symbol substitutions; a gap symbol s′[j] aligned with a non-gap symbol t′[j] implies the insertion of this symbol into t; a gap symbol t′[j] aligned with a non-gap symbol s′[j] implies the deletion of this symbol from s.
+
+Thus, an alignment represents a transformation of s into t via edit operations. We define the corresponding edit alignment score of s′ and t′ as dH(s′,t′) (Hamming distance is used because the gap symbol has been introduced for insertions and deletions). It follows that dE(s,t)=mins′,t′dH(s′,t′), where the minimum is taken over all alignments of s and t. We call such a minimum score alignment an optimal alignment (with respect to edit distance).
+
+Given: Two protein strings s and t in FASTA format (with each string having length at most 1000 aa).
+
+Return: The edit distance dE(s,t) followed by two augmented strings s′ and t′ representing an optimal alignment of s and t.
+
+Sample Dataset
+>Rosalind_43
+PRETTY
+>Rosalind_97
+PRTTEIN
+Sample Output
+4
+PRETTY--
+PR-TTEIN
 ###########################
 ########## ex 23 ##########
 
@@ -443,7 +484,7 @@ Sample Output:
 
 ###########################
 ########## ex 42 ##########
-RNA Splicing
+***RNA Splicing***
 
 After identifying the exons and introns of an RNA string, we only need to delete the introns and concatenate the exons to form a new string ready for translation.
 
@@ -464,5 +505,25 @@ MVYIADKQHVASREAYGHMFKVCA
 
 ###########################
 ########## ex 43 ##########
+***Finding a shared motif***
+
+A common substring of a collection of strings is a substring of every member of the collection. We say that a common substring is a longest common substring if there does not exist a longer common substring. For example, "CG" is a common substring of "ACGTACGT" and "AACCGTATA", but it is not as long as possible; in this case, "CGTA" is a longest common substring of "ACGTACGT" and "AACCGTATA".
+
+Note that the longest common substring is not necessarily unique; for a simple example, "AA" and "CC" are both longest common substrings of "AACC" and "CCAA".
+
+Given: A collection of k (k≤100) DNA strings of length at most 1 kbp each in FASTA format.
+
+Return: A longest common substring of the collection. (If multiple solutions exist, you may return any single solution.)
+
+Sample Dataset:
+>Rosalind_1
+GATTACA
+>Rosalind_2
+TAGACCA
+>Rosalind_3
+ATACA
+
+Sample Output:
+AC
 
 ###########################

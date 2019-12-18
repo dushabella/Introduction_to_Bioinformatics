@@ -1,5 +1,5 @@
-from Bio import pairwise2
-from Bio.pairwise2 import format_alignment
+import numpy as np
+from typing import Tuple
 
 with open('input.txt', 'r') as file:
     lines = file.readlines()
@@ -18,7 +18,25 @@ strings.append(temp)
 strings.remove('')
 print(strings)
 
-def edit_distance(a: str, b: str) -> int:
+def edit_distance(s: str, t: str) -> Tuple[int, np.ndarray]:
+    m = len(s) + 1
+    n = len(t) + 1
+    dynamic_table = np.zeros((m, n))
+    for i in range(m):
+        for j in range(n):
+            if i == 0:
+                dynamic_table[i][j] = j
+            elif j == 0:
+                dynamic_table[i][j] = i
+            elif s[i - 1] == t[j - 1]:
+                dynamic_table[i][j] = dynamic_table[i - 1][j - 1]
+            else:
+                dynamic_table[i][j] = 1 + min(dynamic_table[i - 1][j - 1],
+                                              dynamic_table[i][j - 1],
+                                              dynamic_table[i - 1][j])
+    return int(dynamic_table[m-1][n-1]), dynamic_table
+
+def edit_distance2(a: str, b: str) ->int:
     """Return the Levenshtein edit distance between two strings *a* and *b*."""
     """ https://dzone.com/articles/the-levenshtein-algorithm-1 """
     if a == b:
@@ -38,9 +56,45 @@ def edit_distance(a: str, b: str) -> int:
         previous_row = current_row
     return previous_row[-1]
 
-levensthein_dist = edit_distance(strings[0], strings[1])
-print(levensthein_dist)
+def make_best_align_strings(s: str, t: str, dynamic_table: np.ndarray, indel: str = "-") -> Tuple[str, str]:
+    s_out = ""
+    t_out = ""
+    m = len(s)
+    n = len(t)
 
-alignments = pairwise2.align.globalxx(strings[0], strings[1])
-print(format_alignment(*alignments[0]))
-""" more about alignments: https://developer.ibm.com/articles/j-seqalign/"""
+    while m > 0 and n > 0:
+        options = {
+            "diag": dynamic_table[m - 1][n - 1],
+            "up": dynamic_table[m - 1][n],
+            "left": dynamic_table[m][n - 1]
+        }
+        move = min(options, key=options.get)
+
+        if move == "diag":
+            s_out += s[m - 1]
+            t_out += t[n - 1]
+            m -= 1
+            n -= 1
+        elif move == "up":
+            s_out += s[m - 1]
+            t_out += indel
+            m -= 1
+        elif move == "left":
+            s_out += indel
+            t_out += t[n - 1]
+            n -= 1
+
+    return s_out[::-1], t_out[::-1]
+
+def hamming_distance(s, t):
+    counter = 0
+    for i in range(len(s)):
+        if s[i] != t[i]:
+            counter += 1
+    return counter
+
+distance, d_t = edit_distance(strings[0], strings[1])
+print(distance)
+new_s, new_t = make_best_align_strings(strings[0], strings[1], d_t)
+print(new_s)
+print(new_t)

@@ -1,6 +1,7 @@
 from Bio import SeqIO
 from Bio import pairwise2
 from Bio.SubsMat.MatrixInfo import blosum62
+"""**E**"""
 
 seqs = []
 with open('input.txt', 'r') as f:

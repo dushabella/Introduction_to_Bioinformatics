@@ -1,5 +1,6 @@
 import numpy as np
 from typing import Tuple
+"""**P**"""
 
 with open('input.txt', 'r') as file:
     lines = file.readlines()

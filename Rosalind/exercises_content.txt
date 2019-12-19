@@ -427,15 +427,113 @@ PRETTY--
 PR-TTEIN
 ###########################
 ########## ex 23 ##########
+***Global Alignment with Scoring Matrix***
+To penalize symbol substitutions differently depending on which two symbols are involved in the substitution, we obtain a scoring matrix S in which Si,j represents the (negative) score assigned to a substitution of the ith symbol of our alphabet 𝒜 with the jth symbol of 𝒜.
+
+A gap penalty is the component deducted from alignment score due to the presence of a gap. A gap penalty may be a function of the length of the gap; for example, a linear gap penalty is a constant g such that each inserted or deleted symbol is charged g; as a result, the cost of a gap of length L is equal to gL.
+
+Given: Two protein strings s and t in FASTA format (each of length at most 1000 aa).
+
+Return: The maximum alignment score between s and t. Use:
+
+The BLOSUM62 scoring matrix.
+Linear gap penalty equal to 5 (i.e., a cost of -5 is assessed for each gap symbol).
+
+Sample Dataset:
+>Rosalind_67
+PLEASANTLY
+>Rosalind_17
+MEANLY
+
+Sample Output:
+8
 
 ###########################
 ########## ex 24 ##########
+***Local Alignment with Scoring Matrix***
+
+A local alignment of two strings s and t is an alignment of substrings r and u of s and t, respectively. Let opt(r,u) denote the score of an optimal alignment of r and u with respect to some predetermined alignment score.
+
+Given: Two protein strings s and t in FASTA format (each having length at most 1000 aa).
+
+Return: A maximum alignment score along with substrings r and u of s and t, respectively, which produce this maximum alignment score (multiple solutions may exist, in which case you may output any one). Use:
+
+The PAM250 scoring matrix.
+Linear gap penalty equal to 5.
+
+Sample Dataset:
+>Rosalind_80
+MEANLYPRTEINSTRING
+>Rosalind_21
+PLEASANTLYEINSTEIN
+
+Sample Output:
+23
+LYPRTEINSTRIN
+LYEINSTEIN
 
 ###########################
 ########## ex 25 ##########
+***Global Alignment with Scoring Matrix and Affine Gap Penalty***
+An affine gap penalty is written as a+b⋅(L−1), where L is the length of the gap, a is a positive constant called the gap opening penalty, and b is a positive constant called the gap extension penalty.
+
+We can view the gap opening penalty as charging for the first gap symbol, and the gap extension penalty as charging for each subsequent symbol added to the gap.
+
+For example, if a=11 and b=1, then a gap of length 1 would be penalized by 11 (for an average cost of 11 per gap symbol), whereas a gap of length 100 would have a score of 110 (for an average cost of 1.10 per gap symbol).
+
+Consider the strings "PRTEINS" and "PRTWPSEIN". If we use the BLOSUM62 scoring matrix and an affine gap penalty with a=11 and b=1, then we obtain the following optimal alignment.
+
+ PRT---EINS
+ |||   |||
+ PRTWPSEIN-
+Matched symbols contribute a total of 32 to the calculation of the alignment's score, and the gaps cost 13 and 11 respectively, yielding a total score of 8.
+
+Given: Two protein strings s and t in FASTA format (each of length at most 100 aa).
+
+Return: The maximum alignment score between s and t, followed by two augmented strings s′ and t′ representing an optimal alignment of s and t. Use:
+
+The BLOSUM62 scoring matrix.
+Gap opening penalty equal to 11.
+Gap extension penalty equal to 1.
+
+Sample Dataset:
+>Rosalind_49
+PRTEINS
+>Rosalind_47
+PRTWPSEIN
+
+Sample Output:
+8
+PRT---EINS
+PRTWPSEIN-
 
 ###########################
 ########## ex 26 ##########
+***Multiple Alignment***
+A multiple alignment of a collection of three or more strings is formed by adding gap symbols to the strings to produce a collection of augmented strings all having the same length.
+
+A multiple alignment score is obtained by taking the sum of an alignment score over all possible pairs of augmented strings. The only difference in scoring the alignment of two strings is that two gap symbols may be aligned for a given pair (requiring us to specify a score for matched gap symbols).
+
+Given: A collection of four DNA strings of length at most 10 bp in FASTA format.
+
+Return: A multiple alignment of the strings having maximum score, where we score matched symbols 0 (including matched gap symbols) and all mismatched symbols -1 (thus incorporating a linear gap penalty of 1).
+
+Sample Dataset:
+>Rosalind_7
+ATATCCG
+>Rosalind_35
+TCCG
+>Rosalind_23
+ATGTACTG
+>Rosalind_44
+ATGTCTG
+
+Sample Output:
+-18
+ATAT-CCG
+-T---CCG
+ATGTACTG
+ATGT-CTG
 
 ###########################
 ########## ex 27 ##########
@@ -478,10 +576,74 @@ PR-TTEIN
 
 ###########################
 ########## ex 40 ##########
+***Consensus and Profile***
+A matrix is a rectangular table of values divided into rows and columns. An m×n matrix has m rows and n columns. Given a matrix A, we write Ai,j to indicate the value found at the intersection of row i and column j.
+
+Say that we have a collection of DNA strings, all having the same length n. Their profile matrix is a 4×n matrix P in which P1,j represents the number of times that 'A' occurs in the jth position of one of the strings, P2,j represents the number of times that C occurs in the jth position, and so on (see below).
+
+A consensus string c is a string of length n formed from our collection by taking the most common symbol at each position; the jth symbol of c therefore corresponds to the symbol having the maximum value in the j-th column of the profile matrix. Of course, there may be more than one most common symbol, leading to multiple possible consensus strings.
+
+A T C C A G C T
+G G G C A A C T
+A T G G A T C T
+DNA Strings	A A G C A A C C
+T T G G A A C T
+A T G C C A T T
+A T G G C A C T
+A   5 1 0 0 5 5 0 0
+Profile	C   0 0 1 4 2 0 6 1
+G   1 1 6 3 0 1 0 0
+T   1 5 0 0 0 1 1 6
+Consensus	A T G C A A C T
+Given: A collection of at most 10 DNA strings of equal length (at most 1 kbp) in FASTA format.
+
+Return: A consensus string and profile matrix for the collection. (If several possible consensus strings exist, then you may return any one of them.)
+
+Sample Dataset:
+>Rosalind_1
+ATCCAGCT
+>Rosalind_2
+GGGCAACT
+>Rosalind_3
+ATGGATCT
+>Rosalind_4
+AAGCAACC
+>Rosalind_5
+TTGGAACT
+>Rosalind_6
+ATGCCATT
+>Rosalind_7
+ATGGCACT
+
+Sample Output:
+ATGCAACT
+A: 5 1 0 0 5 5 0 0
+C: 0 0 1 4 2 0 6 1
+G: 1 1 6 3 0 1 0 0
+T: 1 5 0 0 0 1 1 6
 
 ###########################
 ########## ex 41 ##########
+***Location Restriction Sites***
+A DNA string is a reverse palindrome if it is equal to its reverse complement. For instance, GCATGC is a reverse palindrome because its reverse complement is GCATGC. See Figure 2.
 
+Given: A DNA string of length at most 1 kbp in FASTA format.
+
+Return: The position and length of every reverse palindrome in the string having length between 4 and 12. You may return these pairs in any order.
+
+Sample Dataset:
+>Rosalind_24
+TCAATGCATGCGGGTCTATATGCAT
+
+Sample Output:
+4 6
+5 4
+6 6
+7 4
+17 4
+18 4
+20 6
+21 4
 ###########################
 ########## ex 42 ##########
 ***RNA Splicing***

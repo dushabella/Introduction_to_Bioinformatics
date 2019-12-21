@@ -29,12 +29,12 @@ class TxtExtract:
             f.readline()  # ---
 
             print("alphabet:")
-            self.alphabet = f.readline()[:-1].replace("   ", "")
+            self.alphabet = f.readline()[:-1].replace("   ", "").replace("\t", "")
             print(self.alphabet)
             f.readline()  # ---
 
             print("state:")
-            self.state = f.readline()[:-1].replace("   ", "") # {letter: i for i, letter in enumerate(f.readline()[:-1].split())}
+            self.state = f.readline()[:-1].replace("   ", "").replace("\t", "")
             print(self.state)
             f.readline()  # ---
 
@@ -46,6 +46,10 @@ class TxtExtract:
             self.transit_matrix.append(trans_temp_row)
             trans_temp_row = f.readline()[4:-1].replace("   ", " ").split()  # row 1 of transition matrix
             self.transit_matrix.append(trans_temp_row)
+            # trans_temp_row = f.readline()[4:-1].replace("   ", " ").split()  # row 2 of transition matrix
+            # self.transit_matrix.append(trans_temp_row)
+            # trans_temp_row = f.readline()[4:-1].replace("   ", " ").split()  # row 3 of transition matrix
+            # self.transit_matrix.append(trans_temp_row)
             # convert string values into floats
             for i, row in enumerate(self.transit_matrix):
                 self.transit_matrix[i] = [float(x) for x in row]
@@ -60,6 +64,10 @@ class TxtExtract:
             self.emission_matrix.append(emi_temp_row)
             emi_temp_row = f.readline()[4:-1].replace("   ", " ").split()  # row 1 of transition matrix
             self.emission_matrix.append(emi_temp_row)
+            # emi_temp_row = f.readline()[4:-1].replace("   ", " ").split()  # row 2 of transition matrix
+            # self.emission_matrix.append(emi_temp_row)
+            # emi_temp_row = f.readline()[4:-1].replace("   ", " ").split()  # row 3 of transition matrix
+            # self.emission_matrix.append(emi_temp_row)
             # convert string values into floats
             for i, row in enumerate(self.emission_matrix):
                 self.emission_matrix[i] = [float(x) for x in row]
@@ -181,7 +189,6 @@ class TxtExtract:
     def prob_path(self):
         """
             a dynamic programming alogrithm to solve the Decoding Problem.
-
             maximizes Pr(outcome,state) over all possible paths
             """
         # dynamic programming array [A,B,...] x string
@@ -198,6 +205,7 @@ class TxtExtract:
                 break
 
         for i in range(len(self.string) - 1):
+            print("204, prob_path")
             temp_dp = []  # backtracking the dp
             for st in self.state:
                 temp_dp.append(
@@ -217,6 +225,7 @@ class TxtExtract:
             """
         temp_dp = []
         for i, st in enumerate(self.state):
+            print("219, max_state")
             temp_dp.append(dp[i] + self.transition(st, state) + self.emission(state, outcome))
         return max(temp_dp)
 
@@ -228,8 +237,8 @@ class TxtExtract:
         transit_temp = self.transit_matrix[self.state_index[prev_state]][self.state_index[state]]
         if transit_temp == 0:
             return float('-inf')
-        # print("***transition***")
-        # print(self.transit_matrix)
+        print("***transition***")
+        print(self.transit_matrix)
         return math.log(transit_temp)
 
     def emission(self, state, outcome):
@@ -240,6 +249,8 @@ class TxtExtract:
         emitt_temp = self.emission_matrix[self.state_index[state]][self.alphabet_index[outcome]]
         if emitt_temp == 0:
             return float('-inf')
+        print("***emission***")
+        print(self.emission_matrix)
         return math.log(self.emission_matrix[self.state_index[state]][self.alphabet_index[outcome]])
 
 
@@ -271,3 +282,4 @@ def countoverlapping(pattern, string):
 if __name__ == "__main__":
     test = TxtExtract('input.txt')
     test.iter_learning()
+    # trans = test.transition()

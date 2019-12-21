@@ -1,6 +1,6 @@
 import numpy as np
 from typing import Tuple
-"""**P**"""
+"""**Piotrek's solution**"""
 
 with open('input.txt', 'r') as file:
     lines = file.readlines()

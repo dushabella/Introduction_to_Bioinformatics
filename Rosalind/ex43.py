@@ -39,7 +39,7 @@ def lcs2(str1, str2):
             else:
                 if (len(match) > len(res)): res = match
                 match = ""
-    return res
+    return(res)
 
 # here starts the exact solution
 

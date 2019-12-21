@@ -16,7 +16,7 @@ proteins.append(protein_hlpr)
 proteins.remove('')
 
 def edit_distance(a, b):
-    """Return the Levenshtein edit distance between two strings *a* and *b*."""
+    """ Return the Levenshtein edit distance between two strings *a* and *b* """
     """ https://dzone.com/articles/the-levenshtein-algorithm-1 """
     if a == b:
         return 0

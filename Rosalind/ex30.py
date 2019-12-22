@@ -38,7 +38,7 @@ for i in range(len(states)):
 emission_probs = np.zeros((len(states), len(alphabet)))
 
 for i in range(len(states)):
-    prob = lines[15+i].split()
+    prob = lines[13+i].split() # zahardcodowane linie (15 jest dla macierzy o wym 4)
     for j in range(len(alphabet)):
         put = prob[1+j]
         emission_probs[i][j] = float(put)

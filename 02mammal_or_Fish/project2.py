@@ -31,20 +31,18 @@ def read_file(path: str) -> Dict:
 #
 # Z = linkage(Y, 'average')
 # fig = plt.figure(figsize=(25, 10))
-# # dn = dendrogram(Z)
+# dn = dendrogram(Z)
 # print("average: ", Z)
-
 
 # alignments = pairwise2.align.globalms("ACCGT", "ACG", 1, -1, -2, 0) # Last one: -2? -1? 0? 1?
 # print(type(format_alignment(*alignments[0])))
 # print(alignments[0][2])
 
 def distance_matrices(genes: Dict) -> Dict: #Dict[List[List[int]]]
+    gene_matrices = defaultdict(list)
     for key in genes:
-        print(key)
-        gene_matrices = defaultdict(list)
         i=0
-        matrix = []
+        mtrx = []
         for species in genes[key]:
             species_gene1 = species[-1]
             # print("..............")
@@ -55,27 +53,27 @@ def distance_matrices(genes: Dict) -> Dict: #Dict[List[List[int]]]
                 i+=1
                 species_gene2 = species[-1]
                 # print(species_gene2)
-                alignment = pairwise2.align.globalms(species_gene1, species_gene2, 1, -1, -2, -2) # Last one: -2? -1? 0? 1?
-                row.append([alignment[0][2]])
+                alignment = pairwise2.align.globalms(species_gene1, species_gene2, 1, -1, -2, -2)
+                row.append(alignment[0][2])
                 # print(i)
-            matrix.append(row)
-            # print(row)
-        # print(key, matrix)
-        gene_matrices[key] = matrix
+            mtrx.append(row)
+            gene_matrices[key].append(row)
+        print(key, mtrx)
+        # gene_matrices[key].append(mtrx)
 
+    gene_matrices = dict(gene_matrices)
     return gene_matrices
 
-''' displaying distance matrix'''
+def show_dendrograme(distance_matrices: dict) ->None:
+    print(distance_matrices)
+    for key in distance_matrices:
+        print(distance_matrices[key])
+        upgma = linkage(distance_matrices[key], 'average')
+        fig = plt.figure(figsize=(25, 10))
+        dn = dendrogram(upgma)
 
-# from Bio.Phylo.TreeConstruction import _Matrix
-# names = ['Alpha', 'Beta', 'Gamma', 'Delta']
-# matrix = [[0], [1, 0], [2, 3, 0], [4, 5, 6, 0]]
-# m = _Matrix(names, matrix)
-#
-# _Matrix(names=['Alpha', 'Beta', 'Gamma', 'Delta'], matrix=[[0], [1, 0], [2, 3, 0], [4, 5, 6, 0]])
-# print(m)
-
-''' '''
 genes = read_file('genes.txt')
 
 distances = distance_matrices(genes)
+
+show_dendrograme(distances)

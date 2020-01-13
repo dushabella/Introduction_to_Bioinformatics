@@ -33,12 +33,13 @@ def composition(gene: str, kmer: int) -> List[str]:
     fragments = list()
     length = len(gene)
 
-    dupa = ""
+    hlpr = ""
     for i in range(length):
-        dupa = gene[i : i+kmer]
-        if len(dupa) < kmer:
-            dupa = dupa + gene[: kmer-len(dupa)]
-        print(dupa)
+        hlpr = gene[i : i+kmer]
+        len2 = len(hlpr)
+        if len2 < kmer:
+            hlpr = hlpr + gene[: kmer-len2]
+        print(hlpr)
 
     return(fragments)
 

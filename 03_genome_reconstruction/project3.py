@@ -17,17 +17,18 @@ def read_file(path: str) -> Dict:
 
     return(genes)
 
-def composition(gene: str, kmer: int) -> List[str]:
+
+def composition(gene: str, k_len: int) -> List[str]:
     """
     Takes a circular genes and divide it for all possible kmers (fragments) of a size of "kmer" parameter
     and returns a list of k-mers that "wrap around" the end.
 
     For example:
-        composition(“ATACGGTC”, 3)
-        returns: [“ATA”, “TAC”, “ACG”, “CGG”, “GGT”, “GTC”, “TCA”, “CAT”]
+        in: composition(“ATACGGTC”, 3)
+        out: [“ATA”, “TAC”, “ACG”, “CGG”, “GGT”, “GTC”, “TCA”, “CAT”]
 
     :param gene: gene for reconstruction
-    :param kmer: size of each divided kmer (fragment)
+    :param k_len: size of each divided kmer (fragment)
     :return fragments: list of kmers """
 
     fragments = list()
@@ -35,18 +36,40 @@ def composition(gene: str, kmer: int) -> List[str]:
 
     hlpr = ""
     for i in range(length):
-        hlpr = gene[i : i+kmer]
+        hlpr = gene[i : i+k_len]
         len2 = len(hlpr)
-        if len2 < kmer:
-            hlpr = hlpr + gene[: kmer-len2]
-        print(hlpr)
+        if len2 < k_len:
+            hlpr = hlpr + gene[: k_len-len2]
+        fragments.append(hlpr)
 
+    print(fragments)
     return(fragments)
+
+def deBruijn(kmers: List[str]) ->str: #->List[str]:
+    """
+    Reconstruction of a circular string from a k-mers using de Bruijn graph.
+    For example:
+        circular string assembled from the cycle "AC" -> "CT" -> "TA" -> "AC" is simply (ACT)
+    :param kmers: A list of error-free DNA (k+1) mers taken from the strand of circular chromosome
+    :return result: All circular strings assembled by complete cycles in the Bruijn graph. """
+
+    hlpr = ""
+    i = 0
+    for kmer in kmers:
+        if i == 0:
+            hlpr = kmer
+        elif i < len(kmers) - len(kmer) + 1:
+            hlpr += kmer[-1]
+        i += 1
+
+    print(hlpr)
+    return(hlpr)
 
 
 def main():
     genes = read_file("genomes.txt")
-    composition('ATACGGTC', 3)
+    kmers = composition('ATACGGTC', 3)
+    deBruijn(kmers)
 
 if __name__ == "__main__":
     main()

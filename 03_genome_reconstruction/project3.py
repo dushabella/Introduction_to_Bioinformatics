@@ -65,11 +65,50 @@ def deBruijn(kmers: List[str]) ->str: #->List[str]:
     print(hlpr)
     return(hlpr)
 
+def prefix_suffix(kmers: List[str]) ->Dict:
+    """
+    Returns a prefix and a suffix of each kmer from the list
+    For example:
+        circular string assembled from the cycle "AC" -> "CT" -> "TA" -> "AC" is simply (ACT)
+    :param kmers: A list of error-free DNA k-mers taken from the strand of circular chromosome
+    :return result: A dictionary of prefixes and suffixes for each kmer: result[prefix] = suffix
+    """
+    result = dict()
+    hlpr = ""
+    i = 0
+    for kmer in kmers:
+        prefix = kmer[:-1]
+        suffix = kmer[1:]
+        print(prefix)
+        print(suffix)
+        print("__________")
+        result[prefix] = suffix
+
+    return(result)
+
+def distinctive(pref_suf: Dict) -> List[str]:
+    """
+    Creates a list of distinctive (unique) prefixes/suffixes
+    :param pref_suf: A dictionary that contains prefixes and suffixex of kmers
+    :return: list of dictinctive prefixes or suffixes (kmers)
+    """
+
+    result = list()
+    for key, value in pref_suf.items():
+        if key not in result:
+            result.append(key)
+        if value not in result:
+            result.append(value)
+    print(result)
+
+    return(result)
 
 def main():
     genes = read_file("genomes.txt")
     kmers = composition('ATACGGTC', 3)
     deBruijn(kmers)
+    pref_suf = prefix_suffix(kmers)
+    distinctive(pref_suf)
 
 if __name__ == "__main__":
     main()

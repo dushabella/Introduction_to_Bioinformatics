@@ -53,7 +53,6 @@ def composition(genomes: str, k_len: int) -> List[str]:
             hlpr = hlpr + genomes[: k_len-len2]
         fragments.append(hlpr)
 
-    # print(fragments)
     return(fragments)
 
 
@@ -62,65 +61,67 @@ def suffix_prefix(kmers: List[str]) ->Tuple[Dict, int]:
     Returns a prefix and a suffix of each k-mer from the list.
 
     :param kmers: A list of error-free DNA k-mers taken from the strand of circular chromosome
-    :return result: A dictionary of prefixes and suffixes for each kmer: result[prefix] = suffix
+    :return unique: 1 - assembled genome will be unique; 0 - ambiguous
     """
 
     # Quick result: at the end, check if the len(result) is the same as len(kmers)\
     # if yes - the circular genome won't be ambiguous (will be unique)
 
     kmer_len = len(kmers)
-    ambiguous = 1
-    unique = 0 # assembled genome will be ambiguous
+    unique = 0
 
     result = defaultdict(list)
     for kmer in kmers:
         prefix = kmer[:-1]
         suffix = kmer[1:]
-        print(prefix)
-        print(suffix)
         result[suffix].append(prefix)
-        print("suffix:", suffix, "prefiks: ", result[suffix])
-        print("__________")
+        # print("suffix:", suffix, "prefiks: ", result[suffix])
+        # print("__________")
     result = dict(result)
     result_len = len(result)
+    # print('\033[93m' + "dict[suffix] = prefix:" + '\033[0m', result)
     if kmer_len == result_len:
-        print("The number of kmers and distinctive prefixes are the same, so circular gene will be unique!")
+        print('\033[94m' + "The number of kmers and distinctive prefixes are the same, so circular gene will be unique!" + '\033[0m')
         unique = 1
 
-    print("o tutej:", result)
     return(result, unique)
 
 
-def is_ambiguous(pref_suf: Dict) -> List[str]:
+def is_unique(pref_suf: Dict) -> int:
     """
     Checks if the circular genome assembled with these mers will be unique.
 
     :param pref_suf: A dictionary that contains suffixes of kmers and prefixes which correspond them: pref_suf[suffix] = prefixes
-    :return: list of dictinctive prefixes or suffixes (kmers)
+    :return unique: 1 - assembled genome will be unique; 0 - ambiguous
     """
-    # check if in lists of prefixes that correspond to each suffix contains the same prefixes \
-    # if yes - leave only one of them and print the message about how many was removed
+
+    unique = 1 # assembled genome will be unique
+
+    # check if in lists of prefixes that correspond to each suffix are redundances \
+    # if yes - leave only one of each prefix
+    for key in pref_suf:
+        prefixes = pref_suf[key]
+        # print("Prefixes of the suffix", key, "are", prefixes)
+
+        for prefix in prefixes:
+            number = prefixes.count(prefix)
+            if number > 1:
+                prefixes.remove(prefix)
+        pref_suf[key] = prefixes
+
     # check how many prefixes is in each list
     # if each list of prefixes still consist of more than one element - assembled genome will be ambiguous for sure
-
-    suffixes = list()
     for key in pref_suf:
-        suffixes.append(pref_suf[key])
-        print(key, ":", pref_suf[key])
-    print(len(suffixes))
+        prefixes = pref_suf[key]
+        if len(prefixes) > 1:
+            unique = 0
+            print('\033[91m' + "Suffix has more than one distinguishable prefix, so circular gene will be ambiguous!" + '\033[0m')
+            break
 
-    for key in pref_suf:
-        ile = suffixes.count(key)
-        print(key, "ile: ", ile)
+    if unique == 1:
+        print('\033[94m' + "Circular gene will be unique!" + '\033[0m')
 
-    # for key, value in pref_suf.items():
-    #     if key not in result:
-    #         result.append(key)
-    #     if value not in result:
-    #         result.append(value)
-    # print(result)
-
-    # return(result)
+    return(unique)
 
 def simple_reconstruction(kmers: List[str]) ->str: #->List[str]:
     """
@@ -146,15 +147,34 @@ def simple_reconstruction(kmers: List[str]) ->str: #->List[str]:
 
 
 def main():
-    genes = read_file("genomes.txt")
-    kmers = composition('ATACGGTC', 3)
-    simple_reconstruction(kmers)
-    pref_suf, is_unique = suffix_prefix(kmers)
-    example_prefixes_suf, is_unique = suffix_prefix(["CAG", "AGT", "GTT", "TTT", "TTG", "TGG", "GGC", "GCG", "CGT", "GTT", "TTC", "TCA", "CAA", "AAT", "ATT", "TTC", "TCA"])
-    # example_distinctive = is_ambiguous(example_prefixes_suf)
-    # distinctive(pref_suf)
+    result = dict()
 
-    # if is_unique == 1: gene will be unique, break;
+    genomes = read_file("genomes.txt")
+    for key in genomes:
+        print("____________________________________")
+        print("Name:", key)
+        genome = genomes[key]
+        print("genome:", genome)
+
+        result[key] = None
+
+        for i in range(len(genome)):
+            k = i+1
+            kmers = composition(genome, k)
+            simple_reconstruction(kmers)
+            pref_suf, unique = suffix_prefix(kmers)
+            if unique == 1:
+                result[key] = k
+                # reconstruction for checking
+                break
+            else:
+                unique2 = is_unique(pref_suf)
+                if unique2 == 1:
+                    result[key] = k
+                    break
+
+    print(result)
+
 
 if __name__ == "__main__":
     main()

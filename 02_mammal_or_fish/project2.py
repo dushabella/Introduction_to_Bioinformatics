@@ -1,3 +1,7 @@
+"""
+Mini project #2
+"""
+
 from typing import Dict
 from scipy.cluster.hierarchy import dendrogram, linkage
 import numpy as np
